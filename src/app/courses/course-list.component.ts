@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from './course';
+import { CourseService } from './course.service';
 
 @Component({
     selector: 'ap-course-list',
@@ -11,20 +12,11 @@ export class CourseListComponent implements OnInit {
     _courses: Course[] = [];
     
 
+    constructor(private courseService: CourseService){}
+
     ngOnInit(): void { 
 
-        this._courses = [
-            {
-                id: 0,
-                name: 'Angular Forms',
-                imageUrl: '/assets/images/forms.png',
-                price: 99.99,
-                code: "XPS-233",
-                duration: 120,
-                rating: 4.5,
-                releaseDate: 'November,2,2019'
-            }
-        ]
+        this._courses = this.courseService.retrieveAll();
 
     }
 }
